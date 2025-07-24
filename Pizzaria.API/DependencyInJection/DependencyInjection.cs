@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Pizzaria.Application.Mappings;
+using Pizzaria.Infrastructure.Data;
 using System.Text;
 
 namespace Pizzaria.API.DependencyInjection
@@ -76,7 +79,11 @@ namespace Pizzaria.API.DependencyInjection
             });
 
             // 📦 Injeções dos projetos internos
-            //services.AddScoped<IMeuServico, MeuServico>(); // Exemplo
+            services.AddDbContext<PizzariaDbContext>(options =>
+                options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+
+            // AutoMapping Service
+            services.AddAutoMapper(typeof(ProductProfile).Assembly);
 
             return services;
         }
