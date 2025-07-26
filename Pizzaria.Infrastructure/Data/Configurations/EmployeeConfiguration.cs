@@ -18,11 +18,21 @@ namespace Pizzaria.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(20);
 
+            builder.HasIndex(e => e.DocumentNumber)
+                .IsUnique();
+
             builder.Property(e => e.Role)
                 .IsRequired();
 
             builder.Property(e => e.IsActive)
                 .IsRequired();
+
+            builder.HasOne(e => e.User)
+                .WithOne()
+                .HasForeignKey<Employee>(e => e.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
         }
     }
+
 }

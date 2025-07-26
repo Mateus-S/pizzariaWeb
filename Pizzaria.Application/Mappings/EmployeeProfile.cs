@@ -8,8 +8,10 @@ namespace Pizzaria.Application.Mappings
     {
         public EmployeeProfile()
         {
-            CreateMap<Employee, EmployeeDto>().ReverseMap();
-            CreateMap<Employee, CreateEmployeeDto>().ReverseMap();
+            CreateMap<Employee, EmployeeDto>();
+            CreateMap<CreateEmployeeDto, Employee>();
+            CreateMap<UpdateEmployeeDto, Employee>();
         }
     }
+
 }

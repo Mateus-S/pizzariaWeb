@@ -22,11 +22,32 @@ namespace Pizzaria.Infrastructure.Data.Configurations
             builder.Property(o => o.DeliveryType)
                 .IsRequired();
 
-            builder.OwnsOne(o => o.DeliveryAddress);
+            builder.Property(o => o.Notes)
+                .HasMaxLength(500);
+
+            builder.HasOne(o => o.Customer)
+                .WithMany()
+                .HasForeignKey(o => o.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(o => o.Attendant)
+                .WithMany()
+                .HasForeignKey(o => o.AttendantId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasMany(o => o.Items)
-                .WithOne()
+                .WithOne(i => i.Order)
+                .HasForeignKey(i => i.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.OwnsOne(o => o.DeliveryAddress, da =>
+            {
+                da.Property(a => a.Street).HasColumnName("Delivery_Street").IsRequired();
+                da.Property(a => a.Number).HasColumnName("Delivery_Number").IsRequired();
+                da.Property(a => a.Neighborhood).HasColumnName("Delivery_Neighborhood").IsRequired();
+                da.Property(a => a.City).HasColumnName("Delivery_City").IsRequired();
+                da.Property(a => a.Reference).HasColumnName("Delivery_Reference").IsRequired();
+            });
         }
     }
 }

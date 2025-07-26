@@ -9,6 +9,7 @@ namespace Pizzaria.Application.Mappings
         public CustomerProfile()
         {
             CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<Customer, UpdateCustomerDto>().ReverseMap();
             CreateMap<Customer, CreateCustomerDto>().ReverseMap();
         }
     }

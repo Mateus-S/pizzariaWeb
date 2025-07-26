@@ -1,13 +1,12 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Pizzaria.Domain.Entities;
-using Pizzaria.Domain.Enums;
 
 namespace Pizzaria.Infrastructure.Data.Configurations
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class MenuItemConfiguration : IEntityTypeConfiguration<MenuItem>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<MenuItem> builder)
         {
             builder.HasKey(p => p.Id);
 
@@ -15,17 +14,24 @@ namespace Pizzaria.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.HasIndex(p => p.Name); // 🔍 melhora filtros por nome
+
             builder.Property(p => p.Description)
                 .HasMaxLength(255);
 
             builder.Property(p => p.Price)
+                .IsRequired()
                 .HasPrecision(10, 2);
-
-            builder.Property(p => p.Category)
-                .IsRequired();
 
             builder.Property(p => p.IsActive)
                 .IsRequired();
+
+            builder.HasOne(p => p.Category)
+                   .WithMany(c => c.MenuItems)
+                   .HasForeignKey(p => p.CategoryId)
+                   .OnDelete(DeleteBehavior.Restrict)
+                   .IsRequired();
         }
     }
+
 }

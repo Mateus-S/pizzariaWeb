@@ -83,7 +83,7 @@ namespace Pizzaria.API.DependencyInjection
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
             // AutoMapping Service
-            services.AddAutoMapper(typeof(ProductProfile).Assembly);
+            services.AddAutoMapper(typeof(CategoryProfile).Assembly); // já carrega todos
 
             return services;
         }

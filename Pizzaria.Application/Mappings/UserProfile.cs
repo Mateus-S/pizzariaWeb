@@ -8,8 +8,12 @@ namespace Pizzaria.Application.Mappings
     {
         public UserProfile()
         {
-            CreateMap<User, UserDto>().ReverseMap();
-            CreateMap<User, CreateUserDto>().ReverseMap();
+            CreateMap<User, UserDto>();
+            CreateMap<CreateUserDto, User>()
+                .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()); // hashing feito no service
+
+            CreateMap<UpdateUserDto, User>();
         }
     }
+
 }

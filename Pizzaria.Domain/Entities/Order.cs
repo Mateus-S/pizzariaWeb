@@ -1,24 +1,54 @@
-﻿using Pizzaria.Domain.Enums;
-using Pizzaria.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pizzaria.Domain.Entities;
+using Pizzaria.Domain.Enums;
 
-namespace Pizzaria.Domain.Entities
+public class Order
 {
-    public class Order
+    public Guid Id { get; private set; }
+    public DateTime CreatedAt { get; private set; }
+    public OrderStatus Status { get; private set; }
+
+    public Guid? CustomerId { get; private set; }
+    public Customer? Customer { get; private set; }
+
+    public Guid? AttendantId { get; private set; }
+    public Employee? Attendant { get; private set; }
+
+    public ICollection<OrderItem> Items { get; private set; }
+
+    public decimal TotalAmount { get; private set; }
+
+    public string? Notes { get; private set; }
+
+    public DeliveryType DeliveryType { get; private set; }
+
+    public DeliveryAddress? DeliveryAddress { get; private set; }
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    private Order() { }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
+    public Order(Guid? customerId, Guid? attendantId, DeliveryType deliveryType, DeliveryAddress? deliveryAddress, string? notes)
     {
-        public Guid Id { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public OrderStatus Status { get; set; }
-        public Customer? Customer { get; set; }
-        public Employee? Attendant { get; set; }
-        public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
-        public decimal TotalAmount { get; set; }
-        public string? Notes { get; set; }
-        public DeliveryType DeliveryType { get; set; }
-        public DeliveryAddress? DeliveryAddress { get; set; }
+        Id = Guid.NewGuid();
+        CreatedAt = DateTime.UtcNow;
+        Status = OrderStatus.InPreparation;
+        CustomerId = customerId;
+        AttendantId = attendantId;
+        DeliveryType = deliveryType;
+        DeliveryAddress = deliveryAddress;
+        Notes = notes;
+        Items = new List<OrderItem>();
+    }
+
+    public void AddItem(OrderItem item)
+    {
+        if (item == null) throw new ArgumentNullException(nameof(item));
+        Items.Add(item);
+        TotalAmount = Items.Sum(i => i.Total);
+    }
+
+    public void UpdateStatus(OrderStatus status)
+    {
+        Status = status;
     }
 }

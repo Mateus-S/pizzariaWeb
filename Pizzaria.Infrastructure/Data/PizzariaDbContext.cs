@@ -10,7 +10,8 @@ namespace Pizzaria.Infrastructure.Data
 
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderItem> OrderItems => Set<OrderItem>();
-        public DbSet<Product> Products => Set<Product>();
+        public DbSet<MenuItem> MenuItems => Set<MenuItem>();
+        public DbSet<Category> Categories => Set<Category>();
         public DbSet<Customer> Customers => Set<Customer>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Employee> Employees => Set<Employee>();
