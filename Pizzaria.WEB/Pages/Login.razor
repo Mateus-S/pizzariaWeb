@@ -1,0 +1,14 @@
+﻿@page "/login"
+@inject NavigationManager Navigation
+
+<h3>Login</h3>
+
+<button class="btn btn-success" @onclick="HandleLogin">Entrar</button>
+
+@code {
+    private void HandleLogin()
+    {
+        // Simula login bem-sucedido
+        Navigation.NavigateTo("/home");
+    }
+}
