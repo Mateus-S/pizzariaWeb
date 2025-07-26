@@ -33,3 +33,22 @@ Branch: `feature/card-01-config-structure`
 - Corrigido `appsettings.json` para definir `DefaultConnection` com o SQLite
 
 Branch: `feature/card-1.02-sqlite`
+
+---
+
+## ✅ Card 01.03 — Layout Responsivo Blazor com Bootstrap
+
+- Criado layout base responsivo utilizando **Bootstrap 5**
+- Componentes desacoplados:
+  - `Header.razor` com NavBar e navegação via `NavLink`
+  - `Footer.razor` com rodapé reutilizável
+- Atualizado `MainLayout.razor` para usar os novos componentes
+- Criadas páginas principais com rotas configuradas:
+  - `/` e `/home` – Home
+  - `/pedidos` – Pedidos
+  - `/cozinha` – Cozinha
+  - `/entregas` – Entregas
+  - `/login` – Login
+- `NavBar` com colapso para mobile e integração com o sistema de rotas Blazor
+
+Branch: `feature/card-01-03-layout-inicial-blazor`

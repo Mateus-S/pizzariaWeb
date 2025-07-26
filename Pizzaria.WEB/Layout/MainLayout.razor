@@ -1,16 +1,15 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+﻿@using Pizzaria.WEB.Shared
+@inherits LayoutComponentBase
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+<div class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <Header />
+    <!-- Main Content -->
+    <main class="flex-fill">
+        <div class="container py-4">
             @Body
-        </article>
+        </div>
     </main>
+    <!-- Footer -->
+    <Footer />
 </div>
