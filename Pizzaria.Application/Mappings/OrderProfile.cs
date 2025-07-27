@@ -1,6 +1,6 @@
 using AutoMapper;
 using Pizzaria.Domain.Entities;
-using Pizzaria.Application.Dtos.Order;
+using Pizzaria.Shared.DTOs.Order;
 
 namespace Pizzaria.Application.Mappings
 {

@@ -1,6 +1,7 @@
 using AutoMapper;
 using Pizzaria.Domain.Entities;
-using Pizzaria.Application.Dtos.Product;
+using Pizzaria.Shared.DTOs.MenuItem;
+using Pizzaria.Shared.DTOs.Product;
 
 namespace Pizzaria.Application.Mappings
 {

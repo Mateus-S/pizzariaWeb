@@ -1,0 +1,32 @@
+﻿@page "/admin/menu-items"
+@using Pizzaria.Shared.DTOs.MenuItem
+@using Pizzaria.Shared.DTOs.Product
+@using Pizzaria.WEB.Components.MenuItems
+
+<h3>🍕 Gerenciamento de Cardápio</h3>
+
+<div class="mb-3 text-end">
+    <button class="btn btn-primary" @onclick="CreateNewItem">➕ Novo Item</button>
+</div>
+
+@if (isLoading)
+{
+    <p>Carregando itens...</p>
+}
+else
+{
+    <MenuItemListComponent Items="menuItems"
+                           OnEdit="OpenEditForm"
+                           OnToggleStatus="ToggleItemStatus" />
+}
+
+@if (showForm)
+{
+    <MenuItemFormComponent CreateModel="createModel"
+                           UpdateModel="updateModel"
+                           IsEditMode="isEditMode"
+                           OnSaved="OnSaved"
+                           OnCancel="OnCancel" />
+}
+
+

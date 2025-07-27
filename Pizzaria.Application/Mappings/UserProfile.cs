@@ -1,6 +1,6 @@
 using AutoMapper;
 using Pizzaria.Domain.Entities;
-using Pizzaria.Application.Dtos.User;
+using Pizzaria.Shared.DTOs.User;
 
 namespace Pizzaria.Application.Mappings
 {

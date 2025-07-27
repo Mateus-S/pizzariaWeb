@@ -5,6 +5,7 @@ namespace Pizzaria.Infrastructure.Data.Configurations
 {
     public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
     {
+        [Obsolete]
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
             builder.HasKey(x => x.Id);

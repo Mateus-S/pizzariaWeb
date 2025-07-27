@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Pizzaria.Application.Dtos.Category;
+using Pizzaria.Shared.DTOs.Category;
 using Pizzaria.Domain.Entities;
 using System;
 using System.Collections.Generic;

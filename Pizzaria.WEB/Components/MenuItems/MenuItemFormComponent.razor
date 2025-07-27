@@ -1,0 +1,71 @@
+﻿@using Pizzaria.Shared.DTOs.MenuItem
+@inherits MenuItemFormBase
+
+@if (IsEditMode && UpdateModel is not null)
+{
+    <EditForm Model="UpdateModel" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label>Nome</label>
+            <InputText class="form-control" @bind-Value="UpdateModel.Name" />
+        </div>
+
+        <div class="mb-3">
+            <label>Descrição</label>
+            <InputText class="form-control" @bind-Value="UpdateModel.Description" />
+        </div>
+
+        <div class="mb-3">
+            <label>Preço</label>
+            <InputNumber class="form-control" @bind-Value="UpdateModel.Price" />
+        </div>
+
+        <div class="mb-3">
+            <label>Categoria</label>
+            <InputText class="form-control" @bind-Value="UpdateModel.Category" />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-success" type="submit">💾 Salvar</button>
+            <button class="btn btn-secondary" type="button" @onclick="async () => await OnCancel.InvokeAsync()">❌ Cancelar</button>
+        </div>
+    </EditForm>
+}
+else if (!IsEditMode && CreateModel is not null)
+{
+    <EditForm Model="CreateModel" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label>Nome</label>
+            <InputText class="form-control" @bind-Value="CreateModel.Name" />
+        </div>
+
+        <div class="mb-3">
+            <label>Descrição</label>
+            <InputText class="form-control" @bind-Value="CreateModel.Description" />
+        </div>
+
+        <div class="mb-3">
+            <label>Preço</label>
+            <InputNumber class="form-control" @bind-Value="CreateModel.Price" />
+        </div>
+
+        <div class="mb-3">
+            <label>Categoria</label>
+            <InputText class="form-control" @bind-Value="CreateModel.Name" />
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-success" type="submit">💾 Salvar</button>
+            <button class="btn btn-secondary" type="button" @onclick="async () => await OnCancel.InvokeAsync()">❌ Cancelar</button>
+        </div>
+    </EditForm>
+}
+else
+{
+    <p class="text-muted">Nenhum modelo disponível.</p>
+}
