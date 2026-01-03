@@ -1,19 +1,55 @@
 ﻿using Pizzaria.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pizzaria.Domain.Entities
 {
     public class Employee
     {
-        public Guid Id { get; set; }
-        public string FullName { get; set; } = null!;
-        public EmployeeRole Role { get; set; }
-        public string DocumentNumber { get; set; } = null!;
-        public bool IsActive { get; set; } = true;
-    }
+        public Guid Id { get; private set; } = Guid.CreateVersion7();
 
+        public string FullName { get; private set; } = null!;
+        public EmployeeRole Role { get; private set; }
+
+        public string DocumentNumber { get; private set; } = null!;
+        public bool IsActive { get; private set; }
+        public Guid? UserId { get; private set; }
+        public User? User { get; private set; }
+
+        private Employee() { }
+
+        public Employee(string fullName, EmployeeRole role, string documentNumber)
+        {
+            if (string.IsNullOrWhiteSpace(fullName))
+                throw new ArgumentException("Nome do funcionário é obrigatório.", nameof(fullName));
+
+            if (string.IsNullOrWhiteSpace(documentNumber))
+                throw new ArgumentException("Documento é obrigatório.", nameof(documentNumber));
+
+            Id = Guid.NewGuid();
+            FullName = fullName;
+            Role = role;
+            DocumentNumber = documentNumber;
+            IsActive = true;
+        }
+
+        public void Deactivate() => IsActive = false;
+        public void Activate() => IsActive = true;
+
+        public void ChangeName(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+                FullName = name;
+        }
+
+        public void ChangeRole(EmployeeRole role)
+        {
+            Role = role;
+        }
+
+        public void ChangeDocument(string document)
+        {
+            if (!string.IsNullOrWhiteSpace(document))
+                DocumentNumber = document;
+        }
+
+    }
 }

@@ -3,8 +3,36 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Pizzaria.Application.Interfaces.Services;
+using Pizzaria.Application.Interfaces.Services.CustomerService;
+using Pizzaria.Application.Interfaces.Services.EmployeeService;
+using Pizzaria.Application.Interfaces.Services.MenuItemService;
+using Pizzaria.Application.Interfaces.Services.OrderItemService;
+using Pizzaria.Application.Interfaces.Services.OrderService;
+using Pizzaria.Application.Interfaces.Services.UserService;
 using Pizzaria.Application.Mappings;
+using Pizzaria.Application.Services;
+using Pizzaria.Application.Services.CustomerService;
+using Pizzaria.Application.Services.EmployeeService;
+using Pizzaria.Application.Services.MenuItemService;
+using Pizzaria.Application.Services.OrderItemService;
+using Pizzaria.Application.Services.OrderService;
+using Pizzaria.Application.Services.UserService;
+using Pizzaria.Domain.Interfaces.Repositories.CategoryRepository;
+using Pizzaria.Domain.Interfaces.Repositories.CustomerRespository;
+using Pizzaria.Domain.Interfaces.Repositories.EmployeeRespository;
+using Pizzaria.Domain.Interfaces.Repositories.MenuRepository;
+using Pizzaria.Domain.Interfaces.Repositories.OrderItemRepository;
+using Pizzaria.Domain.Interfaces.Repositories.OrderRepository;
+using Pizzaria.Domain.Interfaces.Repositories.UserRepository;
 using Pizzaria.Infrastructure.Data;
+using Pizzaria.Infrastructure.Repositories;
+using Pizzaria.Infrastructure.Repositories.CustomerRepository;
+using Pizzaria.Infrastructure.Repositories.MenuItemRepository;
+using Pizzaria.Infrastructure.Repositories.OrderItemRepository;
+using Pizzaria.Infrastructure.Repositories.OrderRepository;
+using Pizzaria.Infrastructure.Repositories.UserRepository;
+using Pizzaria.Infrastructure.RepositoriesRepository;
 using System.Text;
 
 namespace Pizzaria.API.DependencyInjection
@@ -44,7 +72,7 @@ namespace Pizzaria.API.DependencyInjection
             {
                 options.AddPolicy("AllowBlazorClient", policy =>
                 {
-                    policy.WithOrigins("https://localhost:5002")
+                    policy.WithOrigins("https://localhost:5002", "https://localhost:5028")
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
@@ -83,7 +111,36 @@ namespace Pizzaria.API.DependencyInjection
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
             // AutoMapping Service
-            services.AddAutoMapper(typeof(ProductProfile).Assembly);
+            services.AddAutoMapper(typeof(CategoryProfile).Assembly); // já carrega todos
+
+            services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+            services.AddScoped<IMenuItemService, MenuItemService>();
+
+            // 🧑‍🍳 Category
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            // 🧑‍ Customer
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+
+            // 👨‍🍳 Employee
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
+            // 📦 Order
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+
+            // 🧾 OrderItem
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            services.AddScoped<IOrderItemService, OrderItemService>();
+
+            // 👤 User
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
+
 
             return services;
         }

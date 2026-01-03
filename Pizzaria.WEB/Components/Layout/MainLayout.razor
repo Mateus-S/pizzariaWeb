@@ -1,0 +1,21 @@
+﻿@using Pizzaria.WEB.Shared.Components
+@inherits LayoutComponentBase
+
+<ErrorModal @ref="_errorModal" />
+
+<div class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <Header />
+
+    <!-- Main Content -->
+    <main class="flex-fill">
+        <div class="container py-4">
+            @Body
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+</div>
+
+

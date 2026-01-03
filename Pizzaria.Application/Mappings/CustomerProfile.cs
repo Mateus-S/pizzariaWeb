@@ -1,6 +1,6 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Pizzaria.Domain.Entities;
-using Pizzaria.Application.Dtos.Customer;
+using Pizzaria.Shared.DTOs.Customer;
 
 namespace Pizzaria.Application.Mappings
 {
@@ -8,8 +8,12 @@ namespace Pizzaria.Application.Mappings
     {
         public CustomerProfile()
         {
-            CreateMap<Customer, CustomerDto>().ReverseMap();
-            CreateMap<Customer, CreateCustomerDto>().ReverseMap();
+            // ✅ Leitura: Entity → DTO
+            CreateMap<Customer, CustomerDto>();
+
+            // ✅ Criação: CreateCustomerDto → Customer usando o construtor
+            CreateMap<CreateCustomerDto, Customer>()
+                .ConstructUsing(dto => new Customer(dto.FullName, dto.PhoneNumber, dto.Notes));
         }
     }
 }

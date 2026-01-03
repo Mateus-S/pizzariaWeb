@@ -1,0 +1,34 @@
+﻿@using Pizzaria.Shared.DTOs.MenuItem
+
+<tr>
+    <td>@Item.Name</td>
+    <td>@Item.Description</td>
+    <td>R$ @Item.Price.ToString("F2")</td>
+    <td>@Item.CategoryName</td>
+    <td>
+        @if (Item.IsActive)
+        {
+            <span class="badge bg-success">Ativo</span>
+        }
+        else
+        {
+            <span class="badge bg-secondary">Inativo</span>
+        }
+    </td>
+    <td>
+        <button class="btn btn-sm btn-warning me-2" @onclick="() => OnEdit.InvokeAsync(Item)">
+            ✏️ Editar
+        </button>
+
+        <button class="btn btn-sm @(Item.IsActive ? "btn-outline-danger" : "btn-outline-success")"
+                @onclick="() => OnToggleStatus.InvokeAsync(Item)">
+            @(Item.IsActive ? "Desativar" : "Ativar")
+        </button>
+    </td>
+</tr>
+
+@code {
+    [Parameter] public MenuItemDto Item { get; set; } = default!;
+    [Parameter] public EventCallback<MenuItemDto> OnEdit { get; set; }
+    [Parameter] public EventCallback<MenuItemDto> OnToggleStatus { get; set; }
+}

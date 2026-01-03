@@ -1,0 +1,40 @@
+﻿@using Pizzaria.Shared.DTOs.MenuItem
+@using Pizzaria.WEB.Components.MenuItems
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Items is not null && Items.Any())
+            {
+                @foreach (var item in Items)
+                {
+                    <MenuItemRowComponent Item="item"
+                                          OnEdit="OnEdit"
+                                          OnToggleStatus="OnToggleStatus" />
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Nenhum item encontrado.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter] public List<MenuItemDto> Items { get; set; } = new();
+    [Parameter] public EventCallback<MenuItemDto> OnEdit { get; set; }
+    [Parameter] public EventCallback<MenuItemDto> OnToggleStatus { get; set; }
+}

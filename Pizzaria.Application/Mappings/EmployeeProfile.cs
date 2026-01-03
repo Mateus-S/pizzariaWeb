@@ -1,6 +1,6 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Pizzaria.Domain.Entities;
-using Pizzaria.Application.Dtos.Employee;
+using Pizzaria.Shared.DTOs.Employee;
 
 namespace Pizzaria.Application.Mappings
 {
@@ -8,8 +8,14 @@ namespace Pizzaria.Application.Mappings
     {
         public EmployeeProfile()
         {
-            CreateMap<Employee, EmployeeDto>().ReverseMap();
-            CreateMap<Employee, CreateEmployeeDto>().ReverseMap();
+            // ✅ Leitura: entidade → DTO
+            CreateMap<Employee, EmployeeDto>();
+
+            // ✅ Criação: DTO → entidade usando o construtor
+            CreateMap<CreateEmployeeDto, Employee>()
+                .ConstructUsing(dto => new Employee(dto.FullName, (Domain.Enums.EmployeeRole)dto.Role, dto.DocumentNumber));
+
         }
     }
+
 }
