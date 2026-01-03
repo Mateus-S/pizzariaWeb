@@ -56,7 +56,8 @@ else if (!IsEditMode && CreateModel is not null)
 
         <div class="mb-3">
             <label>Categoria</label>
-            <InputText class="form-control" @bind-Value="CreateModel.Name" />
+            <InputSelect class="form-select" @bind-Value="CreateModel.CategoryId">
+            </InputSelect>
         </div>
 
         <div class="d-flex justify-content-between">

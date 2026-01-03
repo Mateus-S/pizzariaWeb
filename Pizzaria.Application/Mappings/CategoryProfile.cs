@@ -14,8 +14,9 @@ namespace Pizzaria.Application.Mappings
         public CategoryProfile()
         {
             CreateMap<Category, CategoryDto>();
-            CreateMap<CreateCategoryDto, Category>();
-            CreateMap<UpdateCategoryDto, Category>();
+
+            CreateMap<CreateCategoryDto, Category>()
+                .ConstructUsing(dto => new Category(dto.Name));
         }
     }
 }

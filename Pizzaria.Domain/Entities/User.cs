@@ -4,7 +4,7 @@ namespace Pizzaria.Domain.Entities
 {
     public class User
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } = Guid.CreateVersion7();
 
         public string Name { get; private set; } = null!;
         public string Email { get; private set; } = null!;

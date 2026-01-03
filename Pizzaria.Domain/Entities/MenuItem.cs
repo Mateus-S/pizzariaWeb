@@ -10,7 +10,7 @@ namespace Pizzaria.Domain.Entities
     // Domain/Entities/MenuItem.cs
     public class MenuItem
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } = Guid.CreateVersion7();
         public string Name { get; private set; } = string.Empty;
         public string Description { get; private set; } = string.Empty;
         public decimal Price { get; private set; }
@@ -29,6 +29,12 @@ namespace Pizzaria.Domain.Entities
             Description = description;
             Price = price;
             CategoryId = categoryId;
+        }
+        public void Update(string name, decimal price, string description)
+        {
+            Name = name;
+            Price = price;
+            Description = description;
         }
 
         public void Deactivate() => IsActive = false;

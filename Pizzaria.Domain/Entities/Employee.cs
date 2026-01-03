@@ -4,7 +4,7 @@ namespace Pizzaria.Domain.Entities
 {
     public class Employee
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } = Guid.CreateVersion7();
 
         public string FullName { get; private set; } = null!;
         public EmployeeRole Role { get; private set; }
@@ -33,5 +33,23 @@ namespace Pizzaria.Domain.Entities
 
         public void Deactivate() => IsActive = false;
         public void Activate() => IsActive = true;
+
+        public void ChangeName(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+                FullName = name;
+        }
+
+        public void ChangeRole(EmployeeRole role)
+        {
+            Role = role;
+        }
+
+        public void ChangeDocument(string document)
+        {
+            if (!string.IsNullOrWhiteSpace(document))
+                DocumentNumber = document;
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace Pizzaria.WEB.Services
         {
             try
             {
-                var response = await _http.GetFromJsonAsync<List<MenuItemDto>>("/api/menuitems");
+                var response = await _http.GetFromJsonAsync<List<MenuItemDto>>("/api/menuItem");
                 return response ?? new List<MenuItemDto>();
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace Pizzaria.WEB.Services
         {
             try
             {
-                var response = await _http.PostAsJsonAsync("/api/menuitems", dto);
+                var response = await _http.PostAsJsonAsync("api/MenuItem", dto);
                 if (!response.IsSuccessStatusCode)
                 {
                     var error = await response.Content.ReadAsStringAsync();

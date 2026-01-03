@@ -1,3 +1,5 @@
+using Pizzaria.Shared.Enums;
+
 namespace Pizzaria.Shared.DTOs.User
 {
     public class CreateUserDto
@@ -5,7 +7,7 @@ namespace Pizzaria.Shared.DTOs.User
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty; // Recebe senha em texto para ser hasheada
-        public string Role { get; set; } = string.Empty;
+        public UserRoleDto Role { get; set; }
     }
 
 }

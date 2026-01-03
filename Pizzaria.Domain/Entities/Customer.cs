@@ -2,7 +2,7 @@
 {
     public class Customer
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } = Guid.CreateVersion7();
         public string FullName { get; private set; } = null!;
         public string PhoneNumber { get; private set; } = null!;
         public string? Notes { get; private set; }
@@ -30,6 +30,23 @@
         {
             if (address == null) throw new ArgumentNullException(nameof(address));
             Addresses.Add(address);
+        }
+
+        public void ChangeFullName(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+                FullName = name;
+        }
+
+        public void ChangePhoneNumber(string phone)
+        {
+            if (!string.IsNullOrWhiteSpace(phone))
+                PhoneNumber = phone;
+        }
+
+        public void ChangeNotes(string? notes)
+        {
+            Notes = notes;
         }
     }
 }

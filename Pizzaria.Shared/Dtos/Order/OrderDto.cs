@@ -9,8 +9,8 @@ namespace Pizzaria.Shared.DTOs.Order
         public string Status { get; set; } = string.Empty;
         public decimal TotalAmount { get; set; }
 
-        public string? CustomerName { get; set; }
-        public string? AttendantName { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public string AttendantName { get; set; } = string.Empty;
 
         public List<OrderItemDto> Items { get; set; } = new();
         public string DeliveryType { get; set; } = string.Empty;
